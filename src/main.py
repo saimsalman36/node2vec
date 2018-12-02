@@ -46,14 +46,14 @@ def parse_args():
                         help='Inout hyperparameter. Default is 1.')
 
     parser.add_argument('--weighted', dest='weighted', action='store_true',
-                        help='Boolean specifying (un)weighted. Default is unweighted.')
+                        help='Boolean specifying (un)weighted. Default is weighted.')
     parser.add_argument('--unweighted', dest='unweighted', action='store_false')
-    parser.set_defaults(weighted=False)
+    parser.set_defaults(weighted=True)
 
     parser.add_argument('--directed', dest='directed', action='store_true',
-                        help='Graph is (un)directed. Default is undirected.')
+                        help='Graph is (un)directed. Default is directed.')
     parser.add_argument('--undirected', dest='undirected', action='store_false')
-    parser.set_defaults(directed=False)
+    parser.set_defaults(directed=True)
 
     return parser.parse_args()
 
@@ -91,6 +91,7 @@ def main(args):
     '''
     Pipeline for representational learning for all nodes in a graph.
     '''
+
     edge_list = [(1,2,3.0),(2,3,3.4)]
     nx_G = read_graph(edge_list)
     G = node2vec.Graph(nx_G, args.directed, args.p, args.q)
